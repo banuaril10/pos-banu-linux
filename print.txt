@@ -1,0 +1,35 @@
+               IDOLMART               
+       JL. Jend. Ahmad Yani 224       
+       JL. Jend. Ahmad Yani 224       
+         TANGGAL    :01-Oct-24         
+=======================================
+Penjualan        :              45,000
+Diskon           :                   0
+Refund           :                   0
+=======================================
+Penjualan Bersih :              45,000
+Voucher          :                   0
+Reedem Point     :                   0
+=======================================
+           TOTAL :              45,000
+
+Batal            :      0/           0
+Infak            :                   0
+Modal            :              10,000
+Cash In Drawer   :             200,000
+Variant(-)       :                   0
+Variant(+)       :             155,000
+=======================================
+TOTAL TRANSFER   :             200,000
+=======================================
+              BY CATEGORY              
+                                45,000
+=======================================
+           TOTAL :              45,000
+"pos": 01-Oct-24 ~ 10:27:21
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      

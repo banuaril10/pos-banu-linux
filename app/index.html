@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" class="smart-style-5">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production-plugins.css"> 
+    <link rel="stylesheet" href="./css/datatables/datatables.css"> 
+    <link rel="stylesheet" href="../node_modules/datatables.net-keytable-dt/css/keyTable.dataTables.min.css">
+    <link rel="stylesheet" href="../node_modules/datatables.net-select-dt/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <style>
+    div.dataTables_paginate {
+        display:none;
+        }
+    div.dts_label{
+        display:none;
+    }
+	
+	.dot-red {
+        height: 10px;
+        width: 10px;
+        background-color: red;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot-green {
+        height: 10px;
+        width: 10px;
+        background-color: green;
+        border-radius: 50%;
+        display: inline-block;
+      }
+	
+    </style>
+    <title>InfinitePOS</title>
+  </head>
+  <body>
+ <div class="container-fluid"> 
+      
+    <div class="row">
+            <div class="col-sm-6" >
+				<h3>
+					<font class="text-white" id="divshopname"></font>
+					<font class="text-white" id="">(Status POS : </font><font class="text-white" id="online-status"> </font>
+					<br>
+					<font class="text-white" id="">Kasir : </font>  <font class="text-white" id="divusername1"></font> 
+					
+				</h3>
+            </div>
+			
+			
+            <div class="col-sm-6">
+                    <div class="well-agus text-white">              
+                            <h1 style="font-size: 50px" class="text-right" id="divtotal">Rp.0,-</h1>
+                    </div>
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-sm-2 pr-md-1">
+            <!-- <h5 class="text-white" id="divcashiername"></h5> -->
+            <div class="well-agus well-transparent well-shadow-grey">
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="form-group ">
+                            <label for="usr" class="no-margin">No Struk:</label>
+                            <div id="divbillno" class="form-control well-color-light"></div>
+                        </div>
+                    </div>
+					
+                    <div class="col-sm-12" style="display: none">
+                    <div class="form-group ">
+                        <label for="usr" class="no-margin">Kasir:</label>
+                        <div id="divusername" class="form-control"></div>
+                    </div>
+                    </div>
+					
+                    <div class="col-sm-12">
+                        <div class="form-group ">
+                            <label for="usr" class="no-margin">Tanggal:</label>
+                            <div id="divdate" class="form-control"></div>
+                        </div>
+                    </div>
+					
+                    <div class="col-sm-12" style="display: none">
+                        <div class="form-group ">
+                            <label for="usr" class="no-margin">Jam:</label>
+                            <div id="divtime" class="form-control"></div>
+                        </div>
+                    </div> 
+                   
+                    <div class="col-sm-12">
+                        <div class="form-group ">
+                            <label for="usr" class="no-margin">Promo ID:</label>
+                            <input type="text" id="promoName" class="form-control"/>
+                        </div>
+                    </div> 
+
+            </div>
+                </div>
+                <div class="well-agus well-transparent well-shadow-grey">
+                    <div class="row">
+                        <div class="col-sm-12">                     
+                            <div class="form-group ">
+                                <label for="usr" class="no-margin">Member ID: </label>
+                                <input type="text" id="memberid" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">                     
+                            <div class="form-group ">
+                                <label class="no-margin">Name:</label>
+                                <div id="divMemberName" class="form-control well-color-light">
+                                <div id="divMemberId" class="form-control well-color-light"></div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+				
+				
+				<!--<input type="hidden" id="referalstruk" class="form-control"/>-->
+				
+				<div class="well-agus well-transparent well-shadow-grey">
+                    <div class="row">
+                        <div class="col-sm-12">                     
+                            <div class="form-group ">
+                                <label for="usr" class="no-margin">NIK PIC: </label>
+                                <input type="text" id="referalstruk" class="form-control" onkeydown="getNamaHris(this)"/>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+				
+				
+
+            <div class="well-agus well-transparent well-shadow-grey">
+                <div class="row">
+                <div class="col-sm-12">
+                    <h6>List Pending</h6>
+                    <label class="no-margin">Struk No:</label>
+                    <div id="divbillnopending" class="form-control"></div>
+                </div>
+                </div>
+            </div>
+            </div>
+     
+            <div class="col-sm-10 pr-md-1">               
+                <div class="well-agus well-color-light well-shadow-grey" style="height: 50%">
+                <div class="table-responsive">
+                    <table id="tablesales" class="table table-bordered dataTable no-footer" style="width:100%; ">
+                        <thead>
+                            <tr>
+                                <th style="width:5%">No</th>
+                                <th style="width:10%">Barcode</th>
+                                <th style="width:25%">Nama Item</th>
+                                <th style="width:7%">Jumlah</th>
+                                <th style="width:13%">Harga Satuan</th>
+                                <th style="width:10%">Diskon</th>
+                                <th style="width:10%">Total</th>
+                                <!--<th style="width:20%">Discount Name</th>-->
+                            </tr>
+                        </thead>
+                        
+                    </table>
+                </div>
+                </div>
+                <div class="well-agus well-transparent well-shadow-grey" >
+                    <div class="row">
+                        <section class="col col-4">
+                            <label for="productbarcode" class="no-margin">Barcode:</label>                                
+                            <input type="text" class="form-control" id="productbarcode">  
+                        </section>                   
+                        <section class="col col-4">
+                            <label for="productname" class="no-margin">Nama Item:</label>
+                            <input type="search" class="form-control" id="productname" aria-controls="tableproduct">
+                        </section>                           
+                        <section class="col col-4">
+                            <label for="salesqty" class="no-margin">Jumlah:</label>
+                            <input type="text" class="form-control" id="salesqty" onClick="this.select();" >
+                        </section>                       
+                    </div>
+                </div>
+				
+				
+
+			
+			
+			<div class="row">	
+			
+				<div class="col-sm-8 pr-md-1">
+                <div class="well-agus well-color-light well-shadow-grey">
+                <div class="table-responsive">
+                    <table id="tableproduct" class="table table-bordered dataTable no-footer" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Nama Item</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                            </tr>
+                        </thead>
+                        
+                    </table>          
+                </div>
+                </div>
+				</div>
+				
+				
+								
+			<div class="col-sm-4 pr-md-1">
+				<div class="well-agus well-color-light well-shadow-grey">
+				<div class="alert alert-block alert-success" id="divalert" style="display:none"></div>
+				<div class="alert alert-block alert-success" id="divalertinfo" style="font-weight: bold; color: green">Info promo..</div>
+				</div>
+				
+			</div> 
+				
+            </div>
+				
+				
+				
+    
+            </div>
+			
+
+			
+			
+        </div>
+  </div>
+  
+  
+  
+  <div class="footer">
+  
+    <div class="row">
+	 <div class="col-sm-4 pr-md-1"> 
+		
+		<div class="alert alert-block alert-primary" style="width: 100%;"><b>Nama PIC : <font id="namapic">-</font></b></div>
+
+      </div>  
+      <div class="col-sm-8 pr-md-1"> 
+          <span class="badge badge-secondary"><h4>F1</h4>Scanning</span>  
+          <span class="badge badge-secondary"><h4>F2</h4> Void</span>    
+          <span class="badge badge-secondary"><h4>F3</h4> Reprint</span>   
+          <span class="badge badge-secondary"><h4>F4</h4> Refund</span>  
+          <span class="badge badge-secondary"><h4>F5</h4> Discount</span>  
+          <span class="badge badge-secondary"><h4>F6</h4> Pending</span>  
+          <span class="badge badge-secondary"><h4>F7</h4> Bayar</span>  
+          <span class="badge badge-secondary"><h4>F8</h4> +/- Qty</span>  
+          <span class="badge badge-secondary"><h4>F9</h4> Refresh</span>  
+          <span class="badge badge-secondary"><h4>F10</h4> Cari Item</span>  
+          <span class="badge badge-secondary"><h4>F11</h4> Recall</span>  
+          <span class="badge badge-secondary"><h4>F12</h4> Lock</span>   
+          <span class="badge badge-secondary"><h4>HOME</h4> Home</span>
+          <span class="badge badge-secondary"><h4>SHIFT</h4> NIK PIC</span>
+		  <span class="badge badge-secondary"><h4>END</h4> PPOB</span>
+      </div>  
+
+  </div>
+  
+ </div>  
+
+<!--Pay Option-->
+<dialog id="paymod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>PILIH METODE PEMBAYARAN</h3> <hr></div>
+    </div>
+
+    <div class="row">
+              <div class="col-sm-12">  
+                <button type="button" id="btncash" class="btn btn-primary btn-lg btn-block">Tunai</button>
+                <button type="button" id="btndebit" class="btn btn-secondary btn-lg btn-block">Debit</button> 
+                <button type="button" id="btncredit" class="btn btn-danger btn-lg btn-block">Kredit</button>    
+              </div>
+    </div>
+         
+</dialog>
+
+<!--Cash-->
+<dialog id="cashmod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>PEMBAYARAN TUNAI</h3> <hr></div>
+    </div>
+       <!-- Jika Ada Point -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="usePoint" ><label>Reedem Point</label>
+            </div>
+            <input type="text" id="reedemPointCash" class="form-control mb-4" placeholder="Reedem Point" autofocus>
+            <!-- <div id="divCashPointValue" class="form-control"></div>  -->
+        </div>
+
+    </div>   
+    <!-- Yang Harus di bayar -->
+     <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                <label>Total Harus di Bayar</label>
+                    <div id="divpay" class="form-control"></div> 
+                </div>
+            </div>          
+                <!-- Di Terima -->         
+            <div class="col-sm-6">
+                    <div class="form-group ">
+                        <label>Uang di terima</label>
+                        <input type="text" id="paygiven" class="form-control mb-4" placeholder="Uang di terima" autofocus>
+                         
+                    </div>
+            </div>
+     </div>
+
+     <!-- Donasi -->
+     <div class="row">
+        <div class="col-sm-6">
+            <label></label>
+            <label>Infak</label>
+            <input type="text" id="cashdonasiamount" class="form-control mb-4" placeholder="" autofocus>
+        </div>
+    </div>   
+
+    <!-- Di kembalikan -->
+    <div class="row">
+              <div class="col-sm-12 text-center">            
+                  <label>Kembalian</label>
+                    <div id="divpaychange" ></div>                 
+              </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" id="buttoncashsubmit" class="btn btn-primary">Submit</button>
+    </div>
+    
+  
+    
+</dialog>
+
+
+<!-- Debit-->
+<dialog id="debitmod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>PEMBAYARAN DEBIT</h3> <hr></div>
+    </div>
+   
+          <!-- Yang Harus di bayar -->
+    <div class="row">
+          <div class="col-sm-12 text-center">  
+              <label>Total Belanja</label>
+              <div id="divdebitpay" ></div>           
+          </div>
+    </div>
+   
+     <!-- Debit Pay -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="usePointDebit" ><label>Reedem Point</label>
+            </div>
+            <input type="text" id="reedemPointDebit" class="form-control mb-4" placeholder="Reedem Point" autofocus>
+        </div>
+
+        <div class="col-sm-6">           
+            <div class="form-group ">
+                <label>Total Harus di Bayar</label>
+               <div id="divDebitPayAfter" ></div> 
+            </div>
+        </div>
+    </div>
+
+
+    <!-- No Debit Card-->
+    <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-group ">
+                    <label>Di Bayar Debit</label>
+                    <input type="text" id="debitamount" class="form-control mb-4" placeholder="Debit" >
+                   </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group ">
+                        <label>Sisa Harus di Bayar</label>
+                        <div id="debitpaycashvalue" class="form-control mb-4" ></div>
+                    </div>
+                </div>
+    </div>
+ 
+
+    <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group ">
+                  <label>No Debit Card</label>
+                  <input type="text" id="debitcard" class="form-control mb-4" placeholder="Debit ID" >
+                  </div>
+              </div>
+       
+           <!-- No Debit Card-->    
+              <div class="col-sm-6">
+                  <div class="form-group ">
+                  <label>Approve Code</label>
+                  <input type="text" id="debitapprovecode" class="form-control mb-4" placeholder="Approve Code" >
+                  </div>
+              </div>
+    </div>
+
+    <!-- EDC-->
+    <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                <label>Mesin EDC</label>
+                <div id="divdebitedc">
+                </div>
+            </div>
+        </div>
+        <!-- Bank-->       
+            <div class="col-sm-6">
+                <div class="form-group ">
+                  <label>Nama Bank</label>
+                  <div id="divdebitbank"></div>
+                </div>
+            </div>
+    </div>
+    <br>
+    <!-- if cash -->
+    <div class="row">
+            <div class="col-sm-6">
+                    <div class="form-group ">
+                    <label>Uang yg diterima</label>
+                      <input type="text" id="paycashgiven" class="form-control mb-4" onClick="this.select();" placeholder="Tunai" >
+                    </div>
+            </div>
+    <!-- Donasi -->
+            <div class="col-sm-6">
+                <div class="form-group ">
+                        <label>Infak</label>
+                        <input type="text" id="debitdonasiamount" class="form-control mb-4" onClick="this.select();" placeholder="Donasi">
+                    </div>
+            </div>
+                
+    </div>
+
+    
+   <div class="row">
+      <div class="col-sm-12 text-center">
+          <label>Kembalian</label>
+          <div id="debitpaycashreturn" ></div>
+      </div>
+   </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" id="buttondebitsubmit" class="btn btn-primary">Submit</button>
+        </div>
+</dialog>
+
+<!-- Credit-->
+<dialog id="creditmod" >
+        <div class="row">
+              <div class="col-sm-12 text-center"><h3>PEMBAYARAN KREDIT</h3> <hr></div>
+        </div>
+        <!-- Yang Harus di bayar -->
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <label>Total Harus di Bayar</label>
+                    <div id="divcreditpay"></div> 
+            </div>
+        </div>      
+              <!-- Point Yang Mau dipakai-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="usePointCredit" >
+                    <label class="form-check-label" for="usePointCredit">
+                     Reedem Point
+                    </label>
+                </div>
+                <input type="text" id="reedemPointCredit" class="form-control mb-4" placeholder="Reedem Point" autofocus>
+            </div>
+
+            <div class="col-sm-6">
+ 
+            </div>
+        </div>    
+        <!-- No Credit Card-->
+        <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-group ">
+                  <label>No Debit Card</label>
+                  <input type="text" id="creditcard" class="form-control mb-4" placeholder="Credit ID" >
+                  </div>
+              </div>
+           <!-- Approve credit card-->
+              <div class="col-sm-6">
+                  <div class="form-group ">
+                  <label>Approve Code</label>
+                  <input type="text" id="creditapprovecode" class="form-control mb-4" placeholder="Approve Code" >
+                  </div>
+              </div>
+        </div>
+
+        <!-- EDC-->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                  <label>Mesin EDC</label>
+                  <div id="divcreditedc"></div>
+                </div>
+            </div>
+          <!-- Bank-->
+              <div class="col-sm-6">
+                  <div class="form-group ">
+                  <label>Nama Bank</label>
+                  <div id="divcreditbank">
+                  </div>
+              </div>
+          </div>
+   
+        </div>
+
+       
+
+        
+        <div class="row">
+              <div id="creditmodmessage"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="buttoncreditsubmit" class="btn btn-primary">Submit</button>
+        </div>
+</dialog>
+<!-- Refund-->
+<dialog id="refundmod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REFUND</h3> <hr></div>
+    </div>
+          <!-- Yang Harus di bayar -->
+    <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group ">
+              <label>No Struk</label>
+              <input type="text" id="refundbillno" class="form-control mb-4" placeholder="No Struk" >
+              </div>
+          </div>
+    </div>
+          <!-- No Credit Card-->
+    <div class="row">
+              <div class="col-sm-12">
+                  <table id="tablerefund" class="display" style="width:100%">
+                      <thead>
+                          <tr>
+                              <th>Barcode</th>
+                              <th>Nama Item</th>
+                              <th>Jumlah</th>
+                              <th>Harga</th>
+                              <th>Discount</th>
+                              <th>Total</th>
+                          </tr>
+                      </thead>
+                      
+                  </table>
+              </div>
+     </div>
+          
+     <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group ">
+            <label>Refund Qty</label>
+            <input type="text" id="refundqty" class="form-control mb-4" placeholder="Quantity" >
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+            <button type="button" id="buttonrefundsubmit" class="btn btn-default">Submit</button>
+    </div> 
+</dialog>
+<!-- Reprint Option-->
+<dialog id="reprintmod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REPRINT</h3> <hr></div>
+    </div>
+          <!-- Yang Harus di bayar -->
+    <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group ">
+              <label>No Struk</label>
+              <input type="text" id="reprintbillno" class="form-control mb-4" placeholder="No Struk" >
+              </div>
+          </div>
+    </div>
+           
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="well well-sm">
+            <div id="divbillpreview" class="bs-example"></div>
+          </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonreprintsubmit" class="btn btn-default">Print</button>
+    </div>
+</dialog>
+
+<!-- Promo Option-->
+<dialog id="promooptionmod">
+        <div class="row">
+            <div class="col-sm-12 text-center"><h3>Pilih Promo</h3> <hr></div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-12">  
+                    <button type="button" id="btnregulerpromo" class="btn btn-primary btn-lg btn-block">Reguler Promo</button>
+                    <button type="button" id="btnmemberpromo" class="btn btn-secondary btn-lg btn-block">Member Promo</button> 
+                    <button type="button" id="btnmurahpromo" class="btn btn-secondary btn-lg btn-block">Tebus Murah</button> 
+                    <button type="button" id="btnbuyandget" class="btn btn-secondary btn-lg btn-block">Buy and Get</button> 
+            </div>
+        </div>
+             
+</dialog>
+<dialog id="promoregulermod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>Item Promo Reguler</h3> <hr></div>
+    </div>
+      
+    <div class="row">
+        <div class="col-sm-12">
+
+            <table id="tablepromo" class="table table-bordered dataTable"  width="100%">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Nama Item</th>
+                        <th>Harga Normal</th>
+                        <th>Potongan</th>
+                        <th>Harga Promo</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonpromomodclose" class="btn btn-primary">Close</button>
+    </div>
+</dialog>
+
+<dialog id="promomembermod" >
+        <div class="row">
+            <div class="col-sm-12 text-center"><h3>Item Promo member</h3> <hr></div>
+        </div>
+          
+        <div class="row">
+            <div class="col-sm-12">
+    
+                <table id="tablepromomember" class="table table-bordered dataTable"  width="100%">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Nama Item</th>
+                            <th>Harga Normal (Rp)</th>
+                            <th>Harga Promo (Rp)</th>
+                            <th>Max Pembelian (Pcs)</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+                <button type="button" id="buttonpromomemberclose" class="btn btn-primary">Close</button>
+        </div>
+</dialog>
+    
+<dialog id="promomurahmod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>Item Tebus Murah</h3> <hr></div>
+    </div>
+      
+    <div class="row">
+        <div class="col-sm-12">
+
+            <table id="tablepromomurah" class="table table-bordered dataTable"  width="100%">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Nama Item</th>
+                        <th>Harga Normal (Rp)</th>
+                        <th>Harga Promo (Rp)</th>
+                        <th>Sales Amount (Rp)</th>
+                        <th>Discount Include</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonpromomurahclose" class="btn btn-primary">Close</button>
+    </div>
+</dialog>
+
+<dialog id="listbuygetmod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>Item Buy and Get</h3> <hr></div>
+    </div>
+      
+    <div class="row">
+        <div class="col-sm-12">
+
+            <table id="tablebuyget" class="table table-bordered dataTable"  width="100%">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Nama Item</th>
+                        <th>Harga Normal (Rp)</th>
+                        <th>Harga Promo (Rp)</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonlistbuygetclose" class="btn btn-primary">Close</button>
+    </div>
+</dialog>
+
+
+
+<!--Pay Option-->
+<div id="changemoneymod" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">UANG KEMBALIAN</h4>     
+        </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div id="divchangemoney"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="buttonchangemoneysubmit" class="btn btn-primary btn-lg btn-block">Close</button>
+        </div>
+      </div> 
+    </div>
+</div>
+
+<!-- Password -->
+<dialog id="passwordmod" >
+  <div class="row">
+      <div class="col-sm-12 text-center"><h3>PASSWORD ACCESS</h3> <hr></div>
+  </div>
+        <!-- Yang Harus di bayar -->
+  <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group ">
+            <label>Supervisor</label>
+            <select name="usersupervisor" id="usersupervisor"  class="input-lg" style="width:100%;height:25px;"></select>
+            </div>
+        </div>
+
+      <div class="col-sm-6">
+        <div class="form-group ">
+            <label>Sandi</label>
+            <input type="text" id="genid" class="form-control mb-4" disabled >
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="form-group ">
+            <label>Password</label>
+            <input type="password" id="supervisorpwd" class="form-control mb-4" >
+            </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+       <div id="passwordalert"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+          <button type="button" id="buttonpasswordsubmit" class="btn btn-primary">Submit</button>
+  </div>
+</dialog>
+
+<div id="alertmode" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">ERROR</h4>     
+        </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div id="divmessage"></div>
+            </div>
+          </div>
+         
+     <div class="modal-footer">
+        <button type="button" id="buttonclosealert" class="btn btn-primary btn-lg btn-block">Close</button>
+        </div>
+     
+        </div> 
+      
+    </div>
+</div>
+
+<div id="infomode" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Informasi</h4>     
+        </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+                <div id="divinfomessage"></div>
+            </div>
+          </div>
+         
+     <div class="modal-footer">
+        <button type="button" id="buttoncloseinfo" class="btn btn-primary btn-lg btn-block">Close</button>
+        </div>
+     
+        </div> 
+      
+    </div>
+</div>
+
+<!--Ultah-->
+<div id="ultahmod" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>MEMBER SEKARANG ULANG TAHUN KE </h3>
+            </div>
+            <div class="row">
+            <div class="col-sm-12 text-center">
+                <div id="divUltah"></div>
+            </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" id="btnCloseUltah" class="btn btn-primary btn-lg btn-block">Close</button>
+            </div>
+        </div>
+    </div>       
+</dialog>
+
+<!--Info BUY and GET-->
+<dialog id="buygetmod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>Buy and Get</h3> <hr></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">  
+            <button type="button" id="btnbuygetclose" class="btn btn-primary btn-lg btn-block">Close</button>
+        </div>
+    </div>
+         
+</dialog>
+
+</body>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="./js/myfunction.js"></script> 
+<!-- <script src="../node_modules/datatables.net-dt/js/dataTables.keyTable.min.js"></script>
+<script src="../node_modules/datatables.net-dt/js/dataTables.select.min.js"></script> -->
+<script src="./js/datatable/dataTables.keyTable.min.js"></script>
+<script src="./js/datatable/dataTables.select.min.js"></script>
+<script src="./js/datatable/dataTables.scroller.min.js"></script>
+<script src="./js/select2.min.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/smartnotification.js"></script>
+
+
+</html>

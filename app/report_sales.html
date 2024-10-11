@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production-plugins.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production.css"
+    />
+    <link rel="stylesheet" href="./css/datatables/datatables.css" />
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.dataTables.css"
+    />
+
+    <!-- <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/jquery.dataTables.css"> -->
+
+    <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
+    <link rel="stylesheet" href="./css/mystyle.css" />
+    <title>REPORT SALES</title>
+  </head>
+  <body>
+    <div id="loaderpos" class="text-center"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <h3 class="text-white" id="divshopname"></h3>
+        </div>
+        <div class="col-sm-4">
+          <h3 class="text-white text-center">REPORT SALES</h3>
+        </div>
+
+        <div class="col-sm-4 text-right">
+          <button type="button" id="btnback" class="btn btn-success">
+            <i class="fa fa-play"></i> Back
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <label style="color: #fff" for="date">Tanggal : </label>
+        </div>
+        <div class="col-sm-2">
+          <input type="date" id="date_awal" name="date" required />
+          <input type="hidden" id="jenis_laporan" name="jenis_laporan" />
+        </div>
+        <div class="col-sm-2">
+          <input type="date" id="date_akhir" name="date" required />
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-primary" onclick="getSales();">
+            View
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-danger" id="btnexportexcel">
+            <i class="fa fa-file"></i> Export Excel
+          </button>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalesdaily"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-list"></i> Sales Daily
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalesbycashier"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-database"></i> Sales By Cashier
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalesvoid"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-database"></i> Void
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalesnoncash"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-database"></i> Non Cash
+          </button>
+        </div>
+
+      </div>
+
+            <br />
+      <div class="row">
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalesitem"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-database"></i> Sales By Items
+          </button>
+        </div>
+        <div class="col-md-3">
+          <button
+            type="button"
+            id="btnsalestoday"
+            class="btn btn-success btn-lg btn-block"
+          >
+            <i class="fa fa-database"></i> Sales STD APC
+          </button>
+        </div>
+
+
+      </div>
+
+
+      <br />
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well-agus well-color-light well-shadow-grey">
+            <div
+              class="table-responsive"
+              style="width: 100%"
+              id="show_table_sales"
+            >
+              <h3 class="text-center" id="title_report">Judul Laporan</h3>
+
+              <table
+                id="tablesalesdaily"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Sales Date</th>
+                    <th>Close Time</th>
+                    <th>Sales</th>
+                    <th>Discount</th>
+                    <th>Refund</th>
+                    <th>Net Sales</th>
+                    <th>Sales Non Cash</th>
+                    <th>Cash In Sistem</th>
+                    <th>Cash In drawer</th>
+                    <th>Variant</th>
+                    <th>Infaq</th>
+                    <th>Remark</th>
+                    <th>Closed By</th>
+                  </tr>
+                </thead>
+              </table>
+
+              <table
+                id="tablesalesbycashier"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Start Date</th>
+                    <th>Close Date</th>
+                    <th>Cashier Name</th>
+                    <th>Balance</th>
+                    <th>Sales</th>
+                    <th>Discount</th>
+                    <th>Refund</th>
+                    <th>Net Sales</th>
+                    <th>Sales Non Cash</th>
+                    <th>Cash in System</th>
+                    <th>Cash In Drawer</th>
+                    <th>Variant</th>
+                    <th>Infaq</th>
+                    
+                    <th>Status</th>
+                  </tr>
+                </thead>
+              </table>
+
+              <table
+                id="tablesalesvoid"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Date</th>
+                    <th>SKU</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                    <th>Approved By</th>
+                    <th>Cashier Name</th>
+                  </tr>
+                </thead>
+              </table>
+
+              <table
+                id="tablesalesnoncash"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Sales Date</th>
+                    <th>Payment Method</th>
+                    <th>EDC Name</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+              </table>
+
+              <table
+                id="tablesalestoday"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>Store</th>
+                    <th>Omset</th>
+                    <th>STD</th>
+                    <th>APC</th>
+                  </tr>
+                </thead>
+              </table>
+              <table
+                id="tablesalesitem"
+                class="table table-bordered datatable"
+                style="width: 100%; display: none"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Date</th>
+                    <th>SKU</th>
+                    <th>Name</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+
+  <script src="./js/myfunction.js"></script>
+  <script src="./js/smartnotification.js"></script>
+  <script src="./js/select2.min.js"></script>
+  <script src="./js/report_sales.js"></script>
+</html>

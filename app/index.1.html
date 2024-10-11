@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/keyTable.dataTables.min.css">
+    <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/select.dataTables.min.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <title>InfinitePOS</title>
+  </head>
+  <body>
+ <div class="container-fluid">  
+     <div class="row">
+        <div class="col-sm-4">
+         <h3 id="divshopname"></h3>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="divcashiername"></h3>
+           </div>
+        <div class="col-sm-4">
+           <h3 class="text-right" id="divusername"></h3>
+        </div>
+    </div>
+ </div>
+  <div class="container-fluid">     
+      <div class="row">
+        <div class="col-sm-2">
+            <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group ">
+                    <label for="usr">No Struk:</label>
+                    <div id="divbillno" class="form-control"></div>
+                </div>
+           </div>
+           <div class="col-sm-12">
+                <div class="form-group ">
+                <label for="usr">Hari:</label>
+                <div id="divdayname" class="form-control"></div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+              <div class="form-group ">
+                  <label for="usr">Tanggal:</label>
+                  <div id="divdate" class="form-control"></div>
+              </div>
+          </div>
+          <div class="col-sm-12">
+              <div class="form-group ">
+                  <label for="usr">Jam:</label>
+                  <div id="divtime" class="form-control"></div>
+              </div>
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <h3>List Pending</h3>
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Barcode</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>123456</td>
+                      
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>123456</td>                
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>123456</td>
+                    </tr>
+                  
+                  
+                  </tbody>
+                </table>
+          </div>
+        </div>
+
+        </div>
+     
+        <div class="col-sm-10">
+        <h1 class="text-right" id="divtotal">Rp.0,-</h1>
+        <h3>List Penjualan</h3>
+        <div class="table-responsive">
+            <table id="tablesales" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Barcode</th>
+                        <th>Nama Item</th>
+                        <th>Jumlah</th>
+                        <th>Harga Satuan</th>
+                        <th>Diskon</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label for="productbarcode">Barcode:</label>
+                    <input type="text" class="form-control" id="productbarcode">
+                  </div>
+            </div>
+            <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="productname">Nama Item:</label>
+                    <input type="search" class="form-control" id="productname" aria-controls="tableproduct">
+                  </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="salesqty">Jumlah:</label>
+                  <input type="text" class="form-control" id="salesqty">
+                </div>
+          </div>
+        </div>
+
+        <h3>List Product</h3>
+        <div class="table-responsive">
+            <table id="tableproduct" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Barcode</th>
+                        <th>Nama Item</th>
+                        <th>Harga Satuan</th>
+                        <th>Stok</th>
+                    </tr>
+                </thead>
+                
+            </table>
+        
+        </div>
+      </main>
+  
+        </div>
+  </div>
+  </div>
+  <div class="footer">
+  <div class="row">
+      <div class="col-sm-12">
+        <span class="badge badge-secondary"><h4>F1</h4> No Sale</span>      
+        <span class="badge badge-secondary"><h4>F2</h4> Void</span>    
+          <span class="badge badge-secondary"><h4>F3</h4> Reprint</span>   
+          <span class="badge badge-secondary"><h4>F4</h4> Refund</span>  
+          <span class="badge badge-secondary"><h4>F5</h4> Diskon</span>  
+          <span class="badge badge-secondary"><h4>F6</h4> Pending</span>  
+          <span class="badge badge-secondary"><h4>F7</h4> Bayar</span>  
+          <span class="badge badge-secondary"><h4>F8</h4> +/- Qty</span>  
+          <span class="badge badge-secondary"><h4>F10</h4> Cari Item</span>  
+          <span class="badge badge-secondary"><h4>F11</h4> Recall</span>  
+          <span class="badge badge-secondary"><h4>F12</h4> Lock</span>   
+          <span class="badge badge-secondary"><h4>ESC</h4> Keluar</span>  
+ 
+      </div>   
+  </div>
+ </div>  
+
+
+
+
+<!-- Modal -->
+<div id="loginmod" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Sign in</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+    
+            <!-- User ID -->
+            <input type="text" id="userid" class="form-control mb-4" placeholder="User ID">
+        
+            <!-- Password -->
+            <input type="password" id="userpwd" class="form-control mb-4" placeholder="Password">
+
+            <!-- Error Message -->
+            <div id="errormessage"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="buttonlogin" class="btn btn-default">Login</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<div id="paymod" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Pembayaran</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+          </div>
+          <div class="modal-body">    
+            <button type="button" id="btncash" class="btn btn-primary btn-lg btn-block">Tunai</button>
+            <button type="button" id="btndebit" class="btn btn-secondary btn-lg btn-block">Debit</button> 
+            <button type="button" id="btncredit" class="btn btn-default btn-lg btn-block">Kredit</button> 
+              <!-- Error Message -->
+              <div id="errormessage"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+    
+      </div>
+</div>
+<div id="cashmod" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Pembayaran</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">   
+          <!-- Yang Harus di bayar -->
+          <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group ">
+              <label>Total Harus di Bayar</label>
+                  <div id="divpay" class="form-control"></div> 
+              </div>
+          </div>
+          </div>
+            <!-- Di Terima -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group ">
+                    <label>Uang di terima</label>
+                      <input type="text" id="paygiven" class="form-control mb-4" placeholder="Uang di terima" autofocus>
+                    </div>
+                </div>
+            </div>
+          <!-- Di kembalikan -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Kembalian</label>
+                    <div id="divpaychange" class="form-control"></div> 
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div id="cashmodmessage"></div>
+          </div>
+         
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="buttoncashsubmit" class="btn btn-default">Submit</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+<!-- Debit-->
+<div id="debitmod" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Debit</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>         
+        </div>
+        <div class="modal-body">   
+          <!-- Yang Harus di bayar -->
+          <div class="row">
+          <div class="col-sm-12">
+              <div class="form-group ">
+              <label>Total Harus di Bayar</label>
+                  <div id="divdebitpay" class="form-control"></div> 
+              </div>
+          </div>
+          </div>
+            <!-- if cash -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group ">
+                    <label>Di Bayar Tunai</label>
+                      <input type="text" id="paycashgiven" class="form-control mb-4" placeholder="Uang di terima" >
+                    </div>
+                </div>
+            </div>
+          <!-- No Debit Card-->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>No Debit Card</label>
+                  <input type="text" id="debitcard" class="form-control mb-4" placeholder="Debit ID" >
+                  </div>
+              </div>
+          </div>
+           <!-- No Debit Card-->
+           <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Approve Code</label>
+                  <input type="text" id="debitapprovecode" class="form-control mb-4" placeholder="Approve Code" >
+                  </div>
+              </div>
+          </div>
+        <!-- EDC-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group ">
+                <label>Mesin EDC</label>
+                <select id="debitedcno"></select>
+                </div>
+            </div>
+        </div>
+
+          <div class="row">
+              <div id="debitmodmessage"></div>
+          </div>
+         
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="buttondebitsubmit" class="btn btn-default">Submit</button>
+        </div>
+      </div>
+  
+    </div>
+</div>
+
+
+
+  </body>
+  <script>
+require("jquery");
+require('popper.js');
+require('bootstrap');
+
+var jQuery = require("jquery")
+var dt = require('datatables.net')();
+</script>
+<script src="../node_modules/datatables.net-dt/js/dataTables.keyTable.min.js"></script>
+<script src="../node_modules/datatables.net-dt/js/dataTables.select.min.js"></script>
+<script src="renderer.js"></script>
+ <script src="./js/myfunction.js"></script>
+<script>
+ var jsonarray=[];
+ var lastbillno;
+ var shopid;
+ var cashierid;
+ var totalpay=0;
+var divbillno=document.getElementById('divbillno');
+var divtotal=document.getElementById('divtotal');
+var billseqno=0;
+$('#salesqty').val('1');
+$('#productname').keypress(function(event){
+     var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+      // console.log("Testtttt");
+       $('#tableproduct').DataTable().ajax.reload();//counterChecked=0;
+     }
+ });  
+
+ $('#productbarcode').keypress(function(event){
+     var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+      getproduct($('#productbarcode').val(),$('#salesqty').val());
+      $('#productbarcode').val('');
+      $('#salesqty').val('1');
+     }
+
+ });  
+
+function getproduct(strbarcode,strqty){
+  $.ajax({
+        url: "http://localhost:4001/pd/mproduct_bybarcode",
+        type: "GET",
+        global: false,
+        data: {f1:strbarcode},
+        dataType: "json",
+        async: false,
+        success: function (res) {
+          console.log(res.data);
+          var arr = {};
+          $.each(res.data, function (i, item) {
+          
+           savetempsales(cashierid,lastbillno,item.sku,strqty,item.price,item.discount);
+          });
+      
+       $('#tablesales').DataTable().ajax.reload();
+     //  $('#tablesales tbody tr:last-child td:first-child').click();
+    
+        },
+        error:function(res) {
+        }
+        
+    })
+
+  }
+
+
+function savetempsales(_f1,_f2,_f3,_f4,_f5,_f6) {
+
+	$.ajax({
+		type: "POST",
+		url: api_url+"/pd/dtempsalesline",
+		data: JSON.stringify({ f1: _f1,f2:_f2,f3:_f3,f4:_f4,f5:_f5,f6:_f6}),
+		contentType: "application/json",
+		dataType: "json",
+		headers: {"Authorization":localStorage.getItem('token').replace('"','')},
+		success: function (res) {
+        settotalpay(res.data);       
+				//	console.log("Save Success");
+				},
+		error: function (res) {
+					if (res.status==401)
+					{
+						$('#loginmod').modal('show');
+					}
+				}
+	});
+	};
+
+
+function deletetempsales(_f1) {
+	  $.ajax({
+        type: "POST",
+        url: "http://localhost:4001/pd/dtempsaleslineremove",
+        data: JSON.stringify({ f1:_f1}),
+        contentType: "application/json",
+        dataType: "json",
+        headers: {"Authorization":localStorage.getItem('token').replace('"','')},
+        success: function (res) {
+             // console.log("Delete Success");
+              divtotal.innerHTML=res.result;
+            },
+        error: function (res) {
+              if (res.status==401)
+              {
+                $('#loginmod').modal('show');
+              }
+            }
+	});
+	};
+ 
+
+  // Get Shop
+const divshopname=document.getElementById('divshopname');
+
+getinfo();
+function getinfo(){
+  var objinfo = JSON.parse(localStorage.getItem('info'));
+  var objuser = JSON.parse(localStorage.getItem('user'));
+  cashierid=objinfo.cashierid;
+  shopid=objinfo.shopid;
+  divshopname.innerHTML =  objinfo.shopname;
+  divusername.innerHTML =  objinfo.shopname;
+  divcashiername.innerHTML =  objinfo.cashiername;    
+  divusername.innerHTML =  objuser.username;
+};
+//get last bill
+
+getlastbill(shopid);
+function getlastbill(strshopid){
+  $.ajax({
+        url: "http://localhost:4001/pd/dsales_lastbill",
+        type: "GET",
+        global: false,
+        data: {f1:strshopid},
+        dataType: "json",
+        async: false,
+        success: function (res) {
+          console.log(res);
+          $.each(res.data, function (i, item) {
+            lastbillno=item.lastbillno;
+            divbillno.innerHTML =  item.lastbillno;
+            billseqno=item.serialno;
+          });
+          settotalpay(res.data);
+        },
+        error:function(res) {
+        }
+        
+    })
+}
+
+
+//Set Total Pay
+function settotalpay(_objdata){
+  $.each(_objdata, function (i, item) {
+            totalpay=item.lasttempvalue;
+            divtotal.innerHTML=item.lasttempstring;
+            divpay.innerHTML=item.lasttempstring;
+            divdebitpay.innerHTML=item.lasttempstring;
+          });
+}
+// Load Product
+loadproduct("");
+function loadproduct(strsearch) {
+   
+    $('#tableproduct').DataTable( {
+      "autoWidth" : true,
+			"processing": true,
+      "serverSide": true,
+      "lengthChange": false,
+      "searching": false,
+      "pageLength": 5,
+      "ajax": {
+             	"url":'http://localhost:4001/data/data2?f1=8748c423-1825-464b-8918-f05b343e5e76&f2=',
+             	"type": "POST",
+						  "dataType": 'json',
+						  "contentType": "application/json",
+						  "headers": {"Authorization":localStorage.getItem('token').replace('"','')},
+						  "data": function(d){
+              	d.filter = getfiltervalue();
+             // console.log(JSON.stringify(d));
+								return (JSON.stringify(d))
+								}
+				 	},
+        "columns": [
+            { "data": "sku" },
+            { "data": "name" },
+            { "data": "price" },
+            { "data": "stockqty" }
+        ]
+    } );
+    //   $.ajax({
+    //     url: "http://localhost:4001/pd/mproduct",
+    //     type: "GET",
+    //     global: false,
+    //     data: {f1:strsearch},
+    //     dataType: "json",
+    //     async: _async,
+    //     success: function (res) {
+    //       console.log(res);
+    //     },
+    //     error:function(res) {
+    //     }
+        
+    // })
+    };
+
+var table =$('#tablesales').DataTable( {
+      "autoWidth" : true,
+			"processing": true,
+      "serverSide": true,
+      "lengthChange": false,
+      "searching": false,
+      select: true,
+      "oTableTools": {
+            "sRowSelect": "single"
+        },
+     // keys: true,
+      keys: { columns: [3] },
+      "ajax": {
+             	"url":'http://localhost:4001/data/data2?f1=815e5503-3a51-4ed9-ae04-bb6b82427646&f2=',
+             	"type": "POST",
+						  "dataType": 'json',
+						  "contentType": "application/json",
+						  "headers": {"Authorization":localStorage.getItem('token').replace('"','')},
+						  "data": function(d){
+              	d.filter = getsalesfiltervalue();
+             // console.log(JSON.stringify(d));
+								return (JSON.stringify(d))
+								}
+				 	},
+        "columns": [
+            { "data": "seqno" },
+            { "data": "sku" },
+            { "data": "name" },
+            { "data": "qty" },
+            { "data": "price" },
+            { "data": "discount" },
+            { "data": "total" }
+        ],
+        buttons: [
+        {
+            extend: 'selected',
+            action: function ( e, dt, node, config ) {
+                var rows = dt.rows( { selected: true } ).count();
+ 
+                alert( 'There are '+rows+'(s) selected in the table' );
+            }
+        }
+    ]
+  });
+  table.on('key-focus', function (e, datatable, cell) {
+      datatable.rows().deselect();
+      datatable.row( cell.index().row ).select();
+      console.log("Fokus");
+      var rowData = table.rows( { selected: true } ).data()[0];
+      console.log(rowData);
+    });
+  table.on('key', function(e, datatable, key, cell, originalEvent) {
+      if (key === 13) {
+        var data = table.rows( { selected: true } ).data()[0];
+        console.log(data);
+      //  $("#divshopname").html("Code: " + data.name + ". Description: " + data.billno);
+      }
+    });
+    
+
+function getfiltervalue() { 
+   var objfilter = [];
+  var arr = {};
+   arr.id="txtsearch";
+   arr.value=$('#productname').val();
+   objfilter.push(arr);
+  
+   return objfilter;
+}
+function getsalesfiltervalue() { 
+   var objfilter = [];
+  var arr = {};
+   arr.id="pos_mcashier_key";
+   arr.value=cashierid;
+   objfilter.push(arr);
+  
+   return objfilter;
+}
+
+//Cash pay change
+$("#paygiven").on("change",function() {
+  console.log('Changed!');
+  var paychange=$("#paygiven").val()-totalpay;
+  
+  divpaychange.innerHTML=(paychange).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  buttoncashsubmit.focus();
+});
+
+// Modal first Focus
+$('#cashmod').on('shown.bs.modal', function () {
+  $('#paygiven').focus();
+})
+
+// Modal first Focus
+$('#paymod').on('shown.bs.modal', function () {
+  $('#btncash').focus();
+})
+
+</script> 
+
+
+</html>

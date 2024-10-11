@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <title>InfinitePOS</title>
+<!-- <style>
+/* Polyfill for Dialog on FF, Safari etc */
+.no-dialog dialog {
+  display: none;
+}
+
+.no-dialog dialog[open] {
+  display: block;
+}
+
+</style> -->
+
+  </head>
+  <body>
+<button id="button">Open dialog</button>
+<button id="button2">Open dialog 2</button>
+<input type="text" />
+<dialog id="modal">
+  <!-- <form action=""> -->
+    <small>Try navigating through inputs using TAB key (no focus trapping)</small>
+    <p>
+
+      <label>
+          Username
+          <input type="text" />
+        </label>
+    </p>
+    <p>
+      <label>
+          Password
+          <input type="password" />
+        </label>
+    </p>
+    <p>
+
+      <label><input type="checkbox" />Remember me</label>
+    </p>
+
+    <input type="submit" value="Login" />
+
+  <!-- </form> -->
+</dialog>
+
+<dialog id="cashmod" >
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Pembayaran</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              
+            </div>
+            <div class="modal-body">   
+              <!-- Yang Harus di bayar -->
+              <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Total Harus di Bayar</label>
+                      <div id="divpay" class="form-control"></div> 
+                  </div>
+              </div>
+              </div>
+                <!-- Di Terima -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group ">
+                        <label>Uang di terima</label>
+                          <input type="text" id="paygiven" class="form-control mb-4" placeholder="Uang di terima" autofocus>
+                        </div>
+                    </div>
+                </div>
+              <!-- Di kembalikan -->
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="form-group ">
+                      <label>Kembalian</label>
+                        <div id="divpaychange" class="form-control"></div> 
+                      </div>
+                  </div>
+              </div>
+    
+              <div class="row">
+                  <div id="cashmodmessage"></div>
+              </div>
+             
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="buttoncashsubmit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+      
+        </div>
+    </dialog>
+
+  </body>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="./js/myfunction.js"></script>
+
+  <script>
+        var isDialogSupported = true;
+        if (!window.HTMLDialogElement) {
+          document.body.classList.add("no-dialog");
+          isDialogSupported = false;
+        }
+        
+        const button=document.getElementById('button');
+        button.addEventListener('click',function (event){
+        //button.onclick = () => {
+          if (isDialogSupported) {
+           modal.showModal();
+          //  $('#modal').modal('show');
+          } else {
+            modal.setAttribute("open", "");
+          }
+          //   Focus first input when dialog opens
+          modal.querySelector("input").focus();
+        });
+        
+
+        const button2=document.getElementById('button2');
+        button2.addEventListener('click',function (event){
+        //button.onclick = () => {
+          if (isDialogSupported) {
+            cashmod.showModal();
+          //  $('#modal').modal('show');
+          } else {
+            cashmod.setAttribute("open", "");
+          }
+          //   Focus first input when dialog opens
+          cashmod.querySelector("input").focus();
+        });
+    
+        </script>
+</html>

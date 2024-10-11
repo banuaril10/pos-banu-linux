@@ -1,0 +1,43 @@
+create
+    trigger trig_pos_dsalesline_update after insert
+        or delete
+            or update
+                on
+                pos_dsalesline for each row execute procedure trig_pos_mproduct_stock_update();
+
+
+CREATE OR REPLACE FUNCTION public.trig_pos_mproduct_stock_update()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+
+    BEGIN
+
+        IF (TG_OP = 'DELETE') THEN
+          
+            UPDATE pos_mproduct SET 
+             stockqty = stockqty+old.qty
+            WHERE sku = OLD.sku;
+
+          
+            RETURN OLD;
+        ELSIF (TG_OP = 'UPDATE') then
+             
+--            UPDATE pos_mproduct SET 
+--             stockqty = stockqty-old.qty
+--            from 
+--            WHERE sku = NEW.sku;
+
+
+            RETURN NEW;
+        ELSIF (TG_OP = 'INSERT') then
+		    
+           UPDATE pos_mproduct SET 
+             stockqty = stockqty-NEW.qty
+            WHERE sku = NEW.sku;
+
+
+            RETURN NEW;
+        END IF;
+    END;
+$function$

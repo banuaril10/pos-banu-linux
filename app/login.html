@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us" id="lock-page">
+	<head>
+		<meta charset="utf-8">
+		<title>Infinite POS</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+		<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> 
+		<link rel="stylesheet" type="text/css" media="screen" href="css/lockscreen.css">
+
+
+	</head>
+	
+	<body>
+
+		<div id="main" role="main">
+				<h3 class="text-white" id="print_path"></h3>
+
+			<!-- MAIN CONTENT -->
+
+			<form id="login_form" name="login_form" method="POST" class="lockscreen animated flipInY " >
+				<div class="logo">
+					<h1 class="semi-bold-light"><img src="img/logo-o.png" alt="" /><div id="divshopname"></div> Versi : 3.0.2</h1>		
+				</div>
+				<div>
+					<img src="img/avatars/sunny-big.png" alt="" width="200" height="140" />
+					<!--<img src='img/zul.png' width="200" height="140"></img>-->
+					<div>
+						<h1><i class="fa fa-user fa-3x text-muted air air-top-right hidden-mobile" ></i><div id="divcashiername"></div> </h1>
+							<fieldset>
+								
+								<section>
+										
+										<label class="input">
+											<i class="icon-append fa fa-user"></i>
+											<input type="text" id="userid" class="form-control" name="userid" placeholder="User ID">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your User ID</b>
+										</label>
+										<div class="note">
+											<!-- <a href="forgotpassword.html">Forgot password?</a> -->
+										</div>
+							</section>
+								<section>
+										
+										<label class="input">
+											<i class="icon-append fa fa-lock"></i>
+											<input type="password" id="userpwd" class="form-control" name="userpwd" placeholder="Password">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+										</label>
+										<div class="note">
+											<!-- <a href="forgotpassword.html">Forgot password?</a> -->
+										</div>
+								</section>
+					
+						    </fieldset>
+							
+						<footer>
+								<button class="btn btn-primary text-center" type="submit" id="LoginButton" >Sign in</button>
+								<a href="#exit" class="btn btn-primary text-center" >Close</a>
+            </footer>
+
+					</div>
+				</div>
+				<div class="alert alert-warning" style="display: none;"></div>
+				<p class="font-xs margin-top-5">
+					Copyright Infinite ERP 2022.
+
+				</p>
+			</form>
+
+		</div>
+
+		
+	</body>
+	  <!-- JQUERY VALIDATE -->
+	
+	<script src="./js/myfunction.js"></script>
+	<script src="./js/login.js"></script>
+	  <script src="./js/jquery-validate/jquery.validate.min.js"></script>
+  
+</html>

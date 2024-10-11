@@ -1,0 +1,367 @@
+
+<html lang="en" class="smart-style-5">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production-plugins.css"> 
+		<link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production.css">
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <title>HOME</title>
+  </head>
+  <body>
+        <!-- Image loader -->
+ <div id='loaderpos' class="text-center"></div>
+
+ <div class="container-fluid">  
+
+    <div class="row">
+          <div class="col-sm-6">
+          <h1 class="text-white" id="divshopname"></h1>      
+          </div>
+          <div class="col-sm-6">
+               <h1 class="text-white" id="divcashiername"></h1>      
+              </div>
+    </div>
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header text-white" >Welcome to
+                <small>Point of Sale Apps</small>
+            </h1>
+           
+        </div>
+    </div>
+<hr>
+      <div class="row">
+        <div class="col-sm-4">
+            <div class="panel bg-color-blue pricing-big">
+                <img src="./img/ribbon.png" class="ribbon">
+                  <div class="panel-heading">
+                    <div class="badge">Transaksi</div>
+                      <h3 class="panel-title" id="divintbill">0</h3> 
+                  </div>  
+              </div>
+         
+        </div>
+        <div class="col-sm-4">
+            <div class="panel bg-color-blue pricing-big">
+                  <div class="panel-heading">
+                      <div class="badge">Saldo Awal</div>
+                      <h3 class="panel-title" id="divcashierbalance">Rp.0</h3>
+                  </div>  
+              </div>
+         
+        </div>
+        <div class="col-sm-4">
+            <div class="panel bg-color-blue pricing-big">
+                <div class="panel-heading">
+                    <div class="badge">Kasir</div>
+                    <h3 class="panel-title" id="divusername"></h3>
+                </div>  
+            </div>
+        </div>         
+      </div>
+
+
+  <br>
+  <div class="row">
+	   <div class="col-md-4">     
+          <button type="button" id="btnpos" class="btn btn-success btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-play fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold"> Point of Sales</td></tr></table> </button>
+          <button type="button" id="btncashierclose" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-stop fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold"> Tutup Kasir</td></tr></table> </button>   
+          <button type="button" id="btnsalesorder" class="btn btn-danger btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-fast-forward fa-4x"></i> </td><td style="text-align: right; font-size: 20px; font-weight: bold"> Tutup Toko</td></tr></table></button>
+           <button type="button" id="btnchangepassword" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-key fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Password</td></tr></table> </button>
+        </div>
+
+      <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <button type="button" id="btnbalance" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-file-o fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold"> Saldo Awal</td></tr></table></button>
+                <button type="button" id="btnreprintoption" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-print fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Reprint</td></tr></table></button>            
+                <button type="button" id="btncashin" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-money fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Pickup Cash In</td></tr></table></button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btnproduct" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-shopping-cart fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Sync POS</td></tr></table> </button>              
+                <button type="button" id="btnppob" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-mobile fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">PPOB</td></tr></table></button> 
+                <button type="button" id="btnlaporan" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-book fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Laporan</td></tr></table></button> 
+            </div>
+            <div class="col-md-4"> 
+              <button type="button" id="btnsetup" class="btn btn-danger btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-gears fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Setup</td></tr></table> </button>
+              <button type="button" id="btnpricetag" class="btn btn-warning btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-tag fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Price Tag</td></tr></table> </button> 
+              <button type="button" id="btnlogout" class="btn btn-danger btn-lg btn-block"><table style="width: 100%"><tr><td style="text-align: left"><i class="fa fa-lock fa-4x"></i></td><td style="text-align: right; font-size: 20px; font-weight: bold">Logout</td></tr></table></button>            
+            </div>
+        </div>
+      </div>
+
+
+
+  </div>
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-lg-12">
+            <hr>
+            <h1 class="text-white text-center" >
+            <small>@2021 Version 3.0.2</small>
+           
+        </div>
+    </div> 
+
+  </div>
+
+ 
+
+<!-- balance Modal -->
+<dialog id="balancemod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>SALDO AWAL KASIR</h3> <hr></div>
+    </div>
+    
+            <!-- Shift -->
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group ">
+              <label>Shift</label>
+                <div id="divshift"></div>
+          </div>          
+        </div>
+    </div>        
+  
+              <!-- Saldo awal Kasir -->
+    <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Saldo Awal Kasir</label>
+                      <input type="text" id="balanceamount" class="form-control mb-4" >
+                  </div>
+              </div>
+    </div>
+
+            <!-- Error Message -->
+    <div id="balancemodmessage"></div>
+        <div class="modal-footer">
+          <button type="button" id="btnbalancesubmit" class="btn btn-primary">Submit</button>
+        </div>
+
+</dialog>
+
+<!-- Tutup kasir Modal -->
+<dialog id="cashierclosemod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>TUTUP KASIR <h3 class="panel-title" id="divusername1"></h3></h3> <hr></div>
+    </div>
+          <!-- Tanggal -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Tanggal </label>
+                  <div id="divsalesdate" class="form-control"></div> 
+                  </div>
+              </div>
+              </div>
+             <!-- Drawer Cash -->
+             <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Total Uang Cash</label>
+                      <input type="text" id="actualamount" class="form-control mb-4" >
+                  </div>
+              </div>
+              </div>
+      <div class="modal-footer">
+        <button type="button" id="btncashierclosesubmit" class="btn btn-primary">Submit</button>
+      </div>
+</dialog>
+
+<!-- Tutup Toko Modal -->
+<dialog id="shopclosemod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>TUTUP HARIAN</h3> <hr></div>
+    </div>
+          <!-- Tanggal -->
+            <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Tanggal </label>
+                  <div id="divshopsalesdate" class="form-control"></div> 
+                  </div>
+              </div>
+            </div>
+             <!-- Drawer Cash -->
+            <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                  <label>Catatan</label>
+                      <textarea type="text" id="shopclosingremark" class="form-control mb-4" ></textarea>
+                  </div>
+              </div>
+            </div>
+          <!-- Error Message -->
+    <div id="shopclosemodmessage"></div> 
+    <div class="modal-footer">
+        <button type="button" id="btnshopclosesubmit" class="btn btn-primary">Submit</button>
+    </div>
+</dialog>
+
+<!-- Reprint Option -->
+<dialog id="reprinoptionmod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REPRINT STRUK</h3> <hr></div>
+    </div>
+  
+          <!-- Option -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <button type="button" id="btnreprintbalance" class="btn btn-primary btn-lg btn-block">SALDO AWAL</button>
+                  <button type="button" id="btnreprintcashier" class="btn btn-primary btn-lg btn-block">TUTUP KASIR</button>
+                  <button type="button" id="btnreprintshop" class="btn btn-primary btn-lg btn-block">TUTUP HARIAN</button>
+              </div>
+              </div>
+            
+      
+</dialog>
+
+<!-- Reprint Balance -->
+<dialog id="reprinbalancemod">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REPRINT SALDO AWAL</h3> <hr></div>
+    </div>
+          <!-- Option -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                        <label>Struk ID</label>
+                        <select name="cashierbalanceid" id="cashierbalanceid" class="input-lg" style="width:100%;height:25px;" >
+                          </select>
+                  </div>
+              </div>
+          </div>
+    <div class="modal-footer">
+        <button type="button" id="btnreprintbalancesubmit" class="btn btn-primary">Submit</button>
+      </div>       
+      
+</dialog>
+
+<!-- Reprint Cashier closing -->
+<dialog id="reprintcashierclose">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REPRINT TUTUP KASIR</h3> <hr></div>
+    </div>
+          <!-- Option -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                        <label>Struk ID</label>
+                        <select name="reprintcashiercloseid" id="reprintcashiercloseid" class="input-lg" style="width:100%;height:25px;" >
+                          </select>
+                  </div>
+              </div>
+          </div>
+    <div class="modal-footer">
+        <button type="button" id="btnreprintcashierclosesubmit" class="btn btn-primary">Submit</button>
+      </div>       
+      
+</dialog>
+
+<!-- Reprint shop closing -->
+<dialog id="reprintshopclose">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>REPRINT TUTUP HARIAN</h3> <hr></div>
+    </div>
+          <!-- Option -->
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group ">
+                        <label>TANGGAL</label>
+                        <select name="reprintshopcloseid" id="reprintshopcloseid" class="input-lg" style="width:100%;height:25px;" >
+                          </select>
+                  </div>
+              </div>
+          </div>
+    <div class="modal-footer">
+        <button type="button" id="btnreprintshopclosesubmit" class="btn btn-primary">Submit</button>
+      </div>       
+      
+</dialog>
+
+<!-- Change Password -->
+<dialog id="changepasswordmode">
+  <div class="row">
+      <div class="col-sm-12 text-center"><h3>GANTI PASSWORD</h3> <hr></div>
+  </div>
+
+        <font style="color: red" id="status_cp"> Status notif...</font>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group ">
+                      <label>Password Lama</label>
+                      <input type="password" id="oldpwd" class="form-control mb-4" >
+                </div>
+            </div>
+       
+          <div class="col-sm-6">
+              <div class="form-group ">
+                    <label>Password Baru</label>
+                    <input type="password" id="newpwd" class="form-control mb-4" >
+              </div>
+          </div>
+      </div>
+  <div class="modal-footer">
+      <button type="button" id="btnchangepasswordsubmit" class="btn btn-primary">Submit</button>
+    </div>       
+    
+</dialog>
+
+
+<!-- Password -->
+<dialog id="passwordmod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>PASSWORD ACCESS</h3> <hr></div>
+    </div>
+          <!-- Yang Harus di bayar -->
+    <div class="row">
+          <div class="col-sm-6">
+              <div class="form-group ">
+              <label>Supervisor</label>
+              <select name="usersupervisor" id="usersupervisor"  class="input-lg" style="width:100%;height:25px;"></select>
+              </div>
+          </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group ">
+              <label>Sandi</label>
+              <input type="text" id="genid" class="form-control mb-4" disabled >
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+          <div class="form-group ">
+              <label>Password</label>
+              <input type="password" id="supervisorpwd" class="form-control mb-4" >
+              </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="passwordalert">
+            </div>
+        </div>
+      </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonpasswordsubmit" class="btn btn-primary">Submit</button>
+    </div>
+  </dialog>
+
+
+  </body>  
+<script src="./js/myfunction.js"></script>
+<script src="./js/smartnotification.js"></script>
+<script src="./js/select2.min.js"></script>
+<script src="./js/home.js"></script>
+  
+</html>

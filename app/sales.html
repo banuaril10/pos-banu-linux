@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <title>InfinitePOS</title>
+  </head>
+  <body>
+     <div class="row bg-info clearfix">
+      <div class="col-sm-12">
+        <h3>Struk NO</h3>
+      </div>  
+    </div>
+  <div class="container-fluid">     
+   
+         <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group ">
+                    <label for="usr">No Struk:</label>
+                    <input type="text" class="form-control" id="billno" disabled>
+                </div>
+           </div>
+           <div class="col-sm-9">
+                <div class="form-group ">
+                <label for="usr">Hari:</label>
+                <div id="divdayname" class="form-control"></div>
+            </div>
+          </div>
+          <div class="col-sm-9">
+              <div class="form-group ">
+                  <label for="usr">Tanggal:</label>
+                  <div id="divdate" class="form-control"></div>
+              </div>
+          </div>
+          <div class="col-sm-9">
+              <div class="form-group ">
+                  <label for="usr">Jam:</label>
+                  <div id="divtime" class="form-control"></div>
+              </div>
+          </div>  
+        </div>
+      
+  </div>
+
+  </body>
+  <script>
+      const clockElement = document.getElementById('divtime');
+      const dateElement = document.getElementById('divdate');
+      const dayElement = document.getElementById('divdayname');
+      var weekdays = new Array(7);
+        weekdays[0] = "Minggu";
+        weekdays[1] = "Senin";
+        weekdays[2] = "Selasa";
+        weekdays[3] = "Rabu";
+        weekdays[4] = "Kamis";
+        weekdays[5] = "Jumat";
+        weekdays[6] = "Saptu";
+      const setCurrentTime = () => {
+         var dtnow=new Date();
+        clockElement.innerHTML =  dtnow.toLocaleTimeString();
+        dateElement.innerHTML = dtnow.getDate()+'-'+dtnow.getMonth().toString()+'-'+dtnow.getFullYear();
+        dayElement.innerHTML=weekdays[dtnow.getDay()]
+      };
+      setCurrentTime();
+      setInterval(setCurrentTime, 1000);
+    </script>
+  <script src="renderer.js"></script>
+</html>

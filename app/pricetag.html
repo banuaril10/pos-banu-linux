@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="./css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production-plugins.css"> 
+       <link rel="stylesheet" type="text/css" media="screen" href="./css/smartadmin-production.css">     
+       <link rel="stylesheet" href="./css/datatables/datatables.css"> 
+      <!-- <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/jquery.dataTables.css"> -->
+
+
+      <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
+ <link rel="stylesheet" href="./css/mystyle.css">
+
+        <style>
+        input.largerCheckbox {
+            width: 25px;
+            height: 25px;
+        }
+        </style>
+
+    
+      <title>PRICE TAG</title>
+  </head>
+  <body>
+      <div id='loaderpos' class="text-center"></div>
+      <div class="container-fluid">  
+          <div class="row">
+              <div class="col-sm-4">
+                  <h3 class="text-white" id="divshopname"></h3>    
+              </div>
+              <div class="col-sm-4">
+                  <h3 class="text-white text-center">PRICE TAG</h3>    
+              </div>
+			  
+			  
+			  
+              <div class="col-sm-4 text-right">
+                  <button type="button" id="btnback" class="btn btn-success"><i class="fa fa-play "></i> Back</button>   
+              </div>
+          </div>
+		
+          <div class="row">
+              <div class="col-sm-3">
+                  <div class="panel btn-primary pricing-big">
+                        <div class="panel-heading">
+                          <div class="badge">Total Product</div>
+                            <h3 class="panel-title" id="divinttotal">-</h3> 
+                        </div>  
+                    </div>
+               
+              </div>
+              <div class="col-sm-3">
+                  <div class="panel btn-primary pricing-big">
+                        <div class="panel-heading">
+                            <div class="badge">Total Reguler Promo</div>
+                            <h3 class="panel-title" id="divintdiscount">-</h3>
+                        </div>  
+                    </div>
+               
+              </div>
+              <div class="col-sm-3">
+                <div class="panel btn-primary pricing-big">
+                      <div class="panel-heading">
+                          <div class="badge">Total Member Promo</div>
+                          <h3 class="panel-title" id="divintmemberdiscount">-</h3>
+                      </div>  
+                  </div>           
+              </div>
+              <div class="col-sm-3">
+                  <div class="panel btn-primary pricing-big">
+                      <div class="panel-heading">
+                          <div class="badge">Not Sale</div>
+                          <h3 class="panel-title" id="divintnosale">-</h3>
+                      </div>  
+                  </div>
+              </div>         
+            </div>    
+
+            <br>
+			
+            <div class="row">
+                <div class="col-md-12">     
+                    <div class="well-agus well-color-light well-shadow-grey">
+				    <div class="table-responsive" style="width:100%">
+                    <button type="button" id="btncheckall" class="btn btn-success"><i class="fa fa-check-square-o"></i> Check All</button>
+                    <button type="button" id="btnuncheckall" class="btn btn-danger"><i class="fa fa-square-o"></i> Uncheck All</button>                    
+                    <button type="button" id="btnprintpricetag" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Reguler</button>
+                    <button type="button" id="btnprintpricetagpromo" class="btn btn-warning"><i class="fa fa-print"></i> Cetak Promo</button>
+                    
+                <table id="tableproduct" class="table table-bordered datatable"  style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>sku</th>
+                            <th>nama item</th>
+                            <th>harga satuan</th>
+                            <th>potongan reguler</th>
+                            <th>potongan member</th>
+                            <th>stok</th>
+                            <th>shortcut</th>
+                            <th>no sale</th>
+                            <th>rack</th>
+                            <th>remark</th>
+                        </tr>
+                    </thead>
+              </table>
+			</div>
+            </div>
+            </div>
+         </div>
+		 
+		 
+		 
+      </div> 
+  </body>
+  <script src="https://intransit.idolmartidolaku.com/apiidolmart/pricetag/price.js?id=321313"></script>
+  <script src="https://intransit.idolmartidolaku.com/apiidolmart/pricetag/price-promo.js?id=32132321"></script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="./js/myfunction.js"></script> 
+  <script src="./js/smartnotification.js"></script>
+  <script src="./js/select2.min.js"></script>
+  <script src="./js/pricetag.js"></script>
+</html>

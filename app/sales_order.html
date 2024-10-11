@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production-plugins.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production.css"
+    />
+    <link rel="stylesheet" href="./css/datatables/datatables.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/jquery.dataTables.css"> -->
+
+    <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
+    <link rel="stylesheet" href="./css/mystyle.css" />
+    <title>CASH IN</title>
+  </head>
+  <body>
+    <!-- spinner -->
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <h1 class="text-white" id="divcashiername"></h1>
+          <div
+            style="
+              background-color: #fff;
+              text-align: center;
+              border-radius: 10%;
+              font-weight: bold;
+            "
+            id="online-status"
+          ></div>
+        </div>
+
+        <div class="col-sm-4">
+          <h3 class="text-white text-center">SALES ORDER SYNC</h3>
+        </div>
+
+        <div class="col-sm-4 text-right">
+          <button type="button" id="btnback" class="btn btn-success">
+            <i class="fa fa-play"></i> Back
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <label style="color: #fff" for="date">Tanggal : </label>
+        </div>
+        <div class="col-sm-2">
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-primary" onclick="getSales();">
+            Filter Data
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-success" onclick="syncSales();">
+            Sync Data
+          </button>
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-warning" onclick="getSales();">
+            Refresh Data
+          </button>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well-agus well-color-light well-shadow-grey">
+            <div class="table-responsive" style="width: 100%">
+              <table
+                id="salesOrderTable"
+                class="table table-bordered datatable"
+                style="width: 100%"
+              >
+                <thead>
+                  <!-- <tr> -->
+                  <!-- <th colspan="4" style="background-color: rgb(65, 227, 222)">LOKAL</th>
+          <th colspan="4" style="background-color: rgb(17, 255, 0)">WEBPOS</th>
+          <th rowspan="2" style="background-color: rgb(17, 255, 0)">
+            CASHIER BALANCE
+          </th> -->
+                  <!-- <th rowspan="2" style="background-color: rgb(244, 44, 44)">SELISIH HEADER</th>
+          <th rowspan="2" style="background-color: rgb(244, 44, 44)">SELISIH LINE</th> -->
+                  <!-- </tr> -->
+                  <!-- <tr> -->
+                  <!-- <th style="background-color: rgb(65, 227, 222)">STD HEADER</th>
+          <th style="background-color: rgb(65, 227, 222)">AMOUNT HEADER</th>
+          <th style="background-color: rgb(65, 227, 222)">TOTAL LINE</th>
+          <th style="background-color: rgb(65, 227, 222)">AMOUNT LINE</th>
+          <th style="background-color: rgb(17, 255, 0)">STD HEADER</th>
+          <th style="background-color: rgb(17, 255, 0)">AMOUNT HEADER</th>
+          <th style="background-color: rgb(17, 255, 0)">TOTAL LINE</th>
+          <th style="background-color: rgb(17, 255, 0)">AMOUNT LINE</th> -->
+                  <!-- </tr> -->
+                </thead>
+                <tbody id="sales"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    <button
+      type="button"
+      id="btnshopclose"
+      class="btn btn-danger btn-lg btn-block"
+    >Tutup Toko
+    </button>
+    </div>
+    
+    <br>
+
+    <dialog id="shopclosemod">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h3>TUTUP HARIAN</h3>
+          <hr />
+        </div>
+      </div>
+      <!-- Tanggal -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Tanggal </label>
+            <div id="divshopsalesdate" class="form-control"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Drawer Cash -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Catatan</label>
+            <textarea
+              type="text"
+              id="shopclosingremark"
+              class="form-control mb-4"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- Error Message -->
+      <div id="shopclosemodmessage"></div>
+      <div class="modal-footer">
+        <button type="button" id="btnshopclosesubmit" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </dialog>
+
+    <footer>
+      <center><p style="color: #fff">&copy; 2024 - Idolmart Idolaku</p></center>
+    </footer>
+    <!-- jquery -->
+    <script src="./js/myfunction.js"></script>
+    <script src="./js/smartnotification.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./renderer.js"></script>
+    <script src="js/function_sales.js"></script>
+  </body>
+</html>

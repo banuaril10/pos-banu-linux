@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production-plugins.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./css/smartadmin-production.css"
+    />
+    <link rel="stylesheet" href="./css/datatables/datatables.css" />
+    <!-- <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/jquery.dataTables.css"> -->
+
+    <!-- <link rel="stylesheet" href="./css/dashboard.css"> -->
+    <link rel="stylesheet" href="./css/mystyle.css" />
+    <title>CASH IN</title>
+  </head>
+  <body>
+    <div id="loaderpos" class="text-center"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <h3 class="text-white" id="divshopname"></h3>
+        </div>
+
+        <div class="col-sm-3">
+           <h1 class="text-white" id="divcashiername"></h1>  
+        </div>
+
+   
+
+
+        <div class="col-sm-3">
+          <h3 class="text-white text-center">INPUT CASH IN</h3>
+        </div>
+        
+
+        <div class="col-sm-3 text-right">
+          <button type="button" id="btnback" class="btn btn-success">
+            <i class="fa fa-play"></i> Back
+          </button>
+        </div>
+      </div>
+
+      <br />
+
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label style="color: #fff"for="fname" >Date</label>
+                </div>
+                <div class="col-md-8">
+                  <input class="form-control" type="date" id="date" name="date" placeholder="Masukan Tanggal" >
+                </div>
+              </div>
+ <br />
+    <div class="row">
+      <div class="col-md-12" style="text-align: right;">
+        <button style="text-align: right;" type="button" id="btnfiltercashin" class="btn btn-danger">FILTER</button>
+      </div>
+    </div>
+
+
+              <br />
+    <div class="row">
+      <div class="col-md-4">
+        <label style="color: #fff"for="fname" >Cash In</label>
+      </div>
+      <div class="col-md-8">
+        <input class="form-control" type="text" id="cash" name="firstname" placeholder="Masukan Nominal" autofocus>
+      </div>
+    </div>
+<br />
+    <div class="row">
+      <div class="col-md-12" style="text-align: right;">
+        <button style="text-align: right;" type="button" id="btnsavecashin" class="btn btn-primary">SUBMIT</button>
+      </div>
+    </div>
+<br />
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well-agus well-color-light well-shadow-grey">
+            <div class="table-responsive" style="width: 100%">
+
+
+
+
+              <table
+                id="tablecashin"
+                class="table table-bordered datatable"
+                style="width: 100%"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Insert By</th>
+                    <th>Cash</th>
+                    <th>Insert Date</th>
+                    <th>Status Cash In</th>
+                    <th>Approved By</th>
+                    <th>Sync New Pos</th>
+                    <th>Setoran ke-</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodycashin"></tbody>
+
+
+
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="well-agus well-color-light well-shadow-white">
+              <div id="" style="background-color: #fff; padding: 10px;"> Total Cash In (Approved) : <font id="total_cashin"> </font></div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+<dialog id="passwordmod" >
+    <div class="row">
+        <div class="col-sm-12 text-center"><h3>PASSWORD ACCESS</h3> <hr></div>
+    </div>
+          <!-- Yang Harus di bayar -->
+    <div class="row">
+          <div class="col-sm-6">
+              <div class="form-group ">
+              <label>Supervisor</label>
+              <select name="usersupervisor" id="usersupervisor"  class="input-lg" style="width:100%;height:25px;"></select>
+              </div>
+          </div>
+  
+        <div class="col-sm-6">
+          <div class="form-group ">
+              <label>Sandi</label>
+              <input type="text" id="genid" class="form-control mb-4" disabled >
+              <input type="hidden" id="cashinid" >
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+          <div class="form-group ">
+              <label>Password</label>
+              <input type="password" id="supervisorpwd" class="form-control mb-4" >
+              </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="passwordalert">
+            </div>
+        </div>
+      </div>
+    <div class="modal-footer">
+            <button type="button" id="buttonpasswordsubmit" class="btn btn-primary">Submit</button>
+    </div>
+  </dialog>
+
+
+  </body>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="./js/myfunction.js"></script>
+  <script src="./js/smartnotification.js"></script>
+  <script src="./js/select2.min.js"></script>
+  <script src="./js/cashin.js"></script>
+</html>
